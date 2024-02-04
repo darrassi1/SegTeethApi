@@ -16,8 +16,8 @@ jobs:
 
       - name: Docker login
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}  # Corrected closing }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          DOCKER_USER: ${{secrets.DOCKER_USER}}  # Corrected closing }}
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
         run: |
           echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
 
@@ -25,4 +25,4 @@ jobs:
         run: docker build . --file Dockerfile --tag darrassi1/archdental:$(date +%s)
 
       - name: Docker Push
-        run: docker push ${{ secrets.DOCKER_USER }}/archdental
+        run: docker push ${{secrets.DOCKER_USER}}/archdental
