@@ -2,25 +2,25 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag archdental:$(date +%s)
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Docker authentication
-      run: echo '{"auths":{"https://index.docker.io/v1/":{"auth":"$DOCKERHUB_PAT"}}}' > $HOME/.docker/config.json
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag archdental:latest
 
-    - name: Push Docker image to Docker Hub
-      run: |
-        docker tag archdental:$(date +%s) darrassi1/archdental:latest
-        docker push darrassi1/archdental:latest
+      - name: Log in to Docker Hub
+        run: echo '{"auths":{"https://index.docker.io/v1/":{"auth":"'"${{ secrets.DOCKERHUB_PAT }}"'"}}}' > $HOME/.docker/config.json
+
+      - name: Tag Docker image
+        run: docker tag archdental:latest darrassi1/archdental:latest
+
+      - name: Push Docker image to Docker Hub
+        run: docker push darrassi1/archdental:latest
