@@ -18,7 +18,7 @@ jobs:
       run: docker build . --file Dockerfile --tag archdental:$(date +%s)
 
     - name: Login to Docker Hub
-      run: docker login -u darrassi1 -p ${{ secrets.DOCKERHUB_PAT }}
+      run: echo ${{ secrets.DOCKERHUB_PAT }} | docker login -u darrassi1 --password-stdin
 
     - name: Push Docker image to Docker Hub
       run: |
