@@ -1,4 +1,5 @@
 name: Docker Image CI
+
 on:
   push:
     branches: [main]
@@ -15,7 +16,7 @@ jobs:
 
       - name: Docker login
         env:
-          DOCKER_USER: ${{secrets.DOOKER_USER)
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}  # Corrected closing }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
           echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
