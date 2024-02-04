@@ -17,7 +17,7 @@ jobs:
         run: docker build . --file Dockerfile --tag archdental:latest
 
       - name: Log in to Docker Hub
-        run: echo '{"auths":{"https://index.docker.io/v1/":{"auth":"'"${{ secrets.DOCKERHUB_PAT }}"'"}}}' > $HOME/.docker/config.json
+        run: echo '{"auths":{"https://index.docker.io/v1/":{"auth":"dckr_pat_tZFMfyzmxNOEevsm-P_ksSNUWfQ"}}}' > $HOME/.docker/config.json
 
       - name: Tag Docker image
         run: docker tag archdental:latest darrassi1/archdental:latest
